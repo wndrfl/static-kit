@@ -28,6 +28,7 @@ window.app = {
     	console.info('✨Do you believe in magic?✨');
 
     	// Put anything that should be booted *once* on page load, below..
+    	// ...
 
     	// Run the init() method for the app
 		app.global.init();

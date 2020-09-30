@@ -3,12 +3,12 @@
 /////////////////////////////
 
 // Import the Bootstrap 4 grid
-@import '~bootstrap/dist/css/bootstrap-grid.css';
+@import 'bootstrap/scss/bootstrap-grid';
 
 @import 'lib/normalize';
 @import 'lib/pallette';
 
-// CSS used by the WordPress WYSIWYG
+// CSS used by the WordPress WYSIWYG (https://codex.wordpress.org/CSS)
 // If this is a WordPress Project, you should
 // uncomment the below @import
 // @import 'lib/wordpress';

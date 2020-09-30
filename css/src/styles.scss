@@ -1,9 +1,51 @@
-@import 'settings/pallette';
-@import 'settings/fonts';
-@import 'settings/mixins';
+/////////////////////////////
+// Normalization / Settings
+/////////////////////////////
 
-@import 'partials/normalize';
-@import 'partials/wordpress';
-@import 'partials/grid';
+// Import the Bootstrap 4 grid
+@import '~bootstrap/dist/css/bootstrap-grid.css';
+
+@import 'lib/normalize';
+@import 'lib/pallette';
+
+// CSS used by the WordPress WYSIWYG
+// If this is a WordPress Project, you should
+// uncomment the below @import
+// @import 'lib/wordpress';
+
+
+
+
+
+/////////////////////////////
+// Fonts
+/////////////////////////////
+
+// Import Google Fonts (optional - comment or update as needed)
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+@import 'lib/fonts'; // This file should be updated if the above @import changes
+
+
+
+
+
+
+/////////////////////////////
+// Extensions and Mixins
+/////////////////////////////
+
+@import 'lib/mixins';
+@import 'lib/extensions';
+
+
+
+
+
+
+
+/////////////////////////////
+// Project-specific Sheets
+/////////////////////////////
 
 @import 'sheets/theme';
+// @import 'sheets/another-sheet';

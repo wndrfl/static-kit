@@ -42,7 +42,6 @@ function imageMinTask() {
 		.pipe(dest(directories.dist.images));
 }
 
-
 // JS task: concatenates and uglifies JS files to script.js
 function jsTask() {
     return src([

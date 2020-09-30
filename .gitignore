@@ -2,9 +2,4 @@
 node_modules
 
 # Development assets
-css/*.css
-css/*.css.map
-images/*.*
-js/*.js
-js/*.js.map
 index.html

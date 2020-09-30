@@ -7,11 +7,12 @@ module.exports = {
     },
 
     init : function() {
+        var self = this;
         $(window).on('resize',function(e) {
-            measure();
+            self._measure();
         });
-        measure();
+        self._measure();
 
-        $(window).on('window.request-measure',measure);        
+        $(window).on('window.request-measure',self._measure);        
     }
 };

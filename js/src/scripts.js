@@ -1,8 +1,27 @@
+/*
+* GLOBAL DEPENDENCIES
+* ---------------------
+* Set up any dependencies that will be required across
+* the board. If there are dependencies that are only required
+* on specific pages, you should instead include them in the
+* script for that page (inside /pages/mypage.js)
+*/
 window.jQuery = window.$ = require('jquery');
 
+
+/*
+* APP OBJECT
+* ---------------------
+* We are going to store all app-specific logic
+* inside window.app, so that we don't muddy the namespaces.
+*/
 window.app = {
 
-	// Things that should only happen once, ever.
+	/*
+    * GLOBAL BOOT
+    * ---------------------
+    * Things that should only happen once, ever.
+	*/
 	boot: function() {
 
 		// Lets us know that the app has booted.
@@ -16,8 +35,12 @@ window.app = {
 
     global: {
 
-    	// A place to stash variables that are referenced
-    	// on a global level
+		/*
+	    * GLOBAL VARIABLES
+	    * ---------------------
+	    * A place to stash variables that are referenced
+	    * on a global level
+		*/
         vars: {
             window : {
                 w : 0,
@@ -25,13 +48,17 @@ window.app = {
             }
         },
 
-        // Is guaranteed to be run on page load.
-        // This can also be re-run periodically after page load
+		/*
+	    * REUSABLE INITIALIZATION
+	    * ---------------------
+	    * Is guaranteed to be run on page load.
+	    * This can also be safely re-run periodically after page load
+		*/
         init: function() {
 
 
             /*
-            * PAGE-SPECIFIC SCRIPTS
+            * INITIALIZE ANY PAGE-SPECIFIC SCRIPTS
             * ---------------------
             * We are going to use the body id attribute to
             * attempt to load any scripts for this specific page
@@ -64,13 +91,25 @@ window.app = {
         
     },
 
-    // Load all scripts that should only be initialized
-    // on specific pages
+
+    /*
+    * PAGE-SPECIFIC SCRIPTS
+    * ---------------------
+    * Load all scripts that should only be initialized
+    * on specific pages
+    */
     pages: {
         home: require('./pages/home'),
         // anotherPage: require('./pages/anotherPage'),
     },
 
+    /*
+    * GLOBAL SERVICES
+    * ---------------------
+    * Load any scripts / services that should be initialized
+    * on every page. This is good for things like analytics, UI
+    * elements that are present on every page, utilities, etc.
+    */
     services: {
         initScreenMeasure: require('./services/screenMeasure'),
         // anotherService: require('./global/anotherService'),
@@ -78,6 +117,11 @@ window.app = {
 
 };
 
+/*
+* KICK EVERYTHING OFF
+* ---------------------
+* Wait for the document to load and then boot our app.
+*/
 (function( root, $, undefined ) {
 	"use strict";
 	$(function () {

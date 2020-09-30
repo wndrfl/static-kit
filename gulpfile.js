@@ -2,15 +2,18 @@
 // Importing specific gulp API functions lets us write them below as series() instead of gulp.series()
 const { src, dest, watch, series, parallel } = require('gulp');
 // Importing all the Gulp-related packages we want to use
+const babelify = require('babelify');
+const browserify = require('browserify');
 const changed = require('gulp-changed')
 const imagemin = require('gulp-imagemin');
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
-const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const source = require("vinyl-source-stream");
+const buffer = require("vinyl-buffer");
 
 // A dictionary of various directories
 const directories = {
@@ -44,13 +47,15 @@ function imageMinTask() {
 
 // JS task: concatenates and uglifies JS files to script.js
 function jsTask() {
-    return src([
-        files.src.js
-        //,'!' + 'includes/js/jquery.min.js', // to exclude any specific files
-        ])
-        .pipe(concat('scripts.js'))
-        .pipe(uglify())
-        .pipe(dest(directories.dist.js));
+    return browserify(files.src.js)
+	    .transform("babelify", {presets: ["@babel/preset-env"]})
+	    .bundle()
+	    .pipe(source('scripts.js'))
+	    .pipe(buffer())
+	    .pipe(sourcemaps.init())
+	    .pipe(uglify())
+	    .pipe(sourcemaps.write('./'))
+	    .pipe(dest(directories.dist.js));
 }
 
 // Sass task: compiles the styles.scss file into styles.css

@@ -6,3 +6,4 @@ css/*.css
 css/*.css.map
 images/**/*.*
 js/*.js
+js/*.js.map

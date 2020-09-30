@@ -1,0 +1,150 @@
+@mixin border-radius($radius) {
+-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+		border-radius: $radius;
+}
+
+@mixin clearfix {
+	zoom:1;
+	&:before, &:after {
+		content: "\0020";
+		display: block;
+		height: 0;
+		overflow: hidden;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+@function em($target, $context: 16) {
+	@return ($target / $context)*1em;
+}
+
+@mixin box-shadow($params) {
+	-webkit-box-shadow:$params;
+	-moz-box-shadow:$params;
+	box-shadow:$params;
+}
+
+@mixin breakpoint($point) {
+	@if $point == large-desktop-screen {
+		@media (min-width: 1200px) { @content; }
+	}
+	@else if $point == desktop-screen {
+		@media (min-width: 992px)  { @content; }
+	}
+	@else if $point == tablet-screen {
+		@media (min-width: 768px)  { @content; }
+	}
+	@else if $point == phone-screen {
+		@media (max-width: 767px)  { @content; }
+	}
+}
+
+@mixin inset-shadow($type) {
+	@if $type == b {
+		@include box-shadow(inset 0px -5px 0px 0px rgba(0, 0, 0, 0.1));
+	}
+	@else if $type == l {
+		@include box-shadow(inset 5px 0px 0px 0px rgba(0, 0, 0, 0.1));
+	}
+	@else if $type == r {
+		@include box-shadow(inset -5px 0px 0px 0px rgba(0, 0, 0, 0.1));
+	}
+	@else if $type == rb {
+		@include box-shadow(inset -5px -5px 0px 0px rgba(0, 0, 0, 0.1));
+	}
+	@else if $type == t {
+		@include box-shadow(inset 0px 5px 0px 0px rgba(0, 0, 0, 0.1));
+	}
+}
+
+@mixin transform($transform) {
+	-webkit-transform: $transform;
+	-moz-transform: $transform;
+	-ms-transform: $transform;
+	-o-transform: $transform;
+	transform: $transform;
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+	-webkit-transition: $transition-property $transition-time $method;
+	-moz-transition: $transition-property $transition-time $method;
+	-ms-transition: $transition-property $transition-time $method;
+	-o-transition: $transition-property $transition-time $method;
+	transition: $transition-property $transition-time $method;
+}
+
+%align-center {
+	&.align-center {
+		text-align:center;
+	}
+}
+
+%h1 {
+	font-size:28px;
+	font-weight:700;
+	line-height:40px;
+
+	@include breakpoint(tablet-screen) {
+		font-size:44px;
+		font-weight:700;
+		line-height:56px;
+	}
+}
+
+%h2 {
+	font-size:24px;
+	font-weight:700;
+	line-height:32px;
+}
+
+%h3 {
+	font-size:20px;
+	line-height:24px;
+}
+
+%h4 {
+	font-size:12px;
+	letter-spacing:0.8px;
+	line-height:16px;
+}
+
+%h5 {
+	font-size:10px;
+	font-weight:500;
+	letter-spacing:0.8px;
+	line-height:14px;
+}
+
+%headline {
+	color:$black;
+	font-family:$sans-serif;
+	font-weight:700;
+	margin:0;
+
+	@extend %align-center;
+
+	&.white {
+		color:$white;
+
+		a {
+			color:$white;
+		}
+	}
+
+	a {
+		color:$black;
+		text-decoration:none;
+	}
+}
+
+%paragraph {
+	color:$black;
+	font-size:16px;
+	font-weight:400;
+	line-height:24px;
+}

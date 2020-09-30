@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+
+# Development assets
+css/*.css
+css/*.css.map
+js/*.js
+test.html

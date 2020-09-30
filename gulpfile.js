@@ -1,3 +1,11 @@
+// Import our per-project configurations
+let config;
+try {
+	config = require('./statickit.json');
+} catch(err) {
+	//
+}
+
 // Initialize modules
 // Importing specific gulp API functions lets us write them below as series() instead of gulp.series()
 const { src, dest, watch, series, parallel } = require('gulp');
@@ -12,8 +20,9 @@ const uglify = require('gulp-uglify');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const source = require("vinyl-source-stream");
-const buffer = require("vinyl-buffer");
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+
 
 // A dictionary of various directories
 const directories = {
@@ -28,6 +37,24 @@ const directories = {
 		scss : 'css/src/'
 	}
 };
+
+// Allow for overwrites
+if(config && config.paths) {
+	if(config.paths.dist) {
+		for(var i in config.paths.dist) {
+			if(directories.dist[i]) {
+				directories.dist[i] = config.paths.dist[i];
+			}
+		}
+	}
+	if(config.paths.src) {
+		for(var i in config.paths.src) {
+			if(directories.src[i]) {
+				directories.src[i] = config.paths.src[i];
+			}
+		}
+	}
+}
 
 // A dictionary of important files
 const files = {

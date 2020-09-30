@@ -4,6 +4,6 @@ node_modules
 # Development assets
 css/*.css
 css/*.css.map
-images/**/*.*
+images/*.*
 js/*.js
 js/*.js.map

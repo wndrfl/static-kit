@@ -66,7 +66,7 @@ const files = {
 
 // Image minification task: optimizes images for web and saves as a separate file
 function imageMinTask() {
-	return src(directories.src.images + "*")
+	return src(directories.src.images + '*')
 		.pipe(changed(directories.dist.images))
 		.pipe(imagemin())
 		.pipe(dest(directories.dist.images));
@@ -75,7 +75,7 @@ function imageMinTask() {
 // JS task: concatenates and uglifies JS files to script.js
 function jsTask() {
     return browserify(files.src.js)
-	    .transform("babelify", {presets: ["@babel/preset-env"]})
+	    .transform('babelify', {presets: ['@babel/preset-env']})
 	    .bundle()
 	    .pipe(source('scripts.js'))
 	    .pipe(buffer())

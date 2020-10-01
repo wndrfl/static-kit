@@ -8,7 +8,6 @@
 */
 window.jQuery = window.$ = require('jquery');
 
-
 /*
 * APP OBJECT
 * ---------------------

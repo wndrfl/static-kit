@@ -1,5 +1,3 @@
 .DS_Store
 node_modules
-
-# Development assets
-index.html
+static-kit-style-guide.html

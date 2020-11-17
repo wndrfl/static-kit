@@ -9,11 +9,11 @@ $serif: serif;
 
 /**
  * Set preferred font properties across the board
- * Note: Newer descriptor `font-display` utilizes swap (Google Webmasters preferred).
+ * Note: Newer descriptor `font-display` utilizes `swap` (also see Google Webmasters preferred options).
  * By doing so, this enables the font face an extremely small block period and an infinite swap period.
- * Liken of this to that of the progressive option for images in that it renders a fallback font face until
- * the primary is available. If the primary font face is loaded during the display timeline, it will
- * swap to that.
+ * Liken this to that of the progressive option for images in that it renders a fallback font face until
+ * the primary is available. If the primary font face is loaded during the font face display timeline,
+ * it will swap to that.
  */
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -26,11 +26,12 @@ $serif: serif;
   letter-spacing: normal !important;
   font-size: 14px;
   font-display: swap;
+  color: #000;
 }
 
 /**
  * Example of how to load your custom font
- * Note 1: If you’ve downloaded, converted, or received a webfont please ensure you have all font
+ * Note 1: If you’ve downloaded, converted, or received a webfont, please ensure you have all font
  * extensions as per below:
  * fonts/
  * ├── REPLACE_WITH_CUSTOM_FONT.eot
@@ -39,9 +40,9 @@ $serif: serif;
  * ├── REPLACE_WITH_CUSTOM_FONT.woff
  * ├── REPLACE_WITH_CUSTOM_FONT.woff2
  *
- * Note 2: Although a font might appear to have a bold/light weight or italicized appearance,
+ * Note 2: Although a webfont might appear to have a bold/light weight or italicized appearance,
  * YOU SHOULD’T assume the values of `font-weight` or `font-style`. In most cases, these
- * should be set to normal. Read the documentation or same CSS that's provided to do
+ * should be set to `normal`. Read the documentation or same CSS that's provided to do
  * right by your webfont.
  *
  * Note 3: Uncomment the code below and replace the values required by your webfont.

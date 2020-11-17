@@ -113,15 +113,9 @@ textarea {
 }
 
 /**
- * Addresses margins handled incorrectly in IE 6/7.
- */
-body {
-  margin: 0;
-}
-
-/**
- * Adds smooth scrolling
- * Prevent content from getting wider than browser (Google Webmaster)
+ * Adds smooth scrolling support for anchor ('a') elements hashed links,
+ * as this enables them to smoothly travel up or down the page resting on their intended target.
+ * Prevent content from getting wider than browser (Google Webmaster) by hiding with `overflow-x'.
  */
 html, body {
   overflow-x: hidden;
@@ -503,7 +497,6 @@ button {
 
 //  Inputs and buttons
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
 
 button::-moz-focus-inner,
 input::-moz-focus-inner {

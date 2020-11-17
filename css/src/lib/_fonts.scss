@@ -1,2 +1,67 @@
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒ Fonts --- Home to any custom webfonts + preferred font properties
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
 $sans-serif: "Open Sans",sans-serif;
 $serif: serif;
+
+/**
+ * Set preferred font properties across the board
+ * Note: Newer descriptor `font-display` utilizes swap (Google Webmasters preferred).
+ * By doing so, this enables the font face an extremely small block period and an infinite swap period.
+ * Liken of this to that of the progressive option for images in that it renders a fallback font face until
+ * the primary is available. If the primary font face is loaded during the display timeline, it will
+ * swap to that.
+ */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  letter-spacing: normal !important;
+  font-size: 14px;
+  font-display: swap;
+}
+
+/**
+ * Example of how to load your custom font
+ * Note 1: If you’ve downloaded, converted, or received a webfont please ensure you have all font
+ * extensions as per below:
+ * fonts/
+ * ├── REPLACE_WITH_CUSTOM_FONT.eot
+ * ├── REPLACE_WITH_CUSTOM_FONT.svg
+ * ├── REPLACE_WITH_CUSTOM_FONT.ttf
+ * ├── REPLACE_WITH_CUSTOM_FONT.woff
+ * ├── REPLACE_WITH_CUSTOM_FONT.woff2
+ *
+ * Note 2: Although a font might appear to have a bold/light weight or italicized appearance,
+ * YOU SHOULD’T assume the values of `font-weight` or `font-style`. In most cases, these
+ * should be set to normal. Read the documentation or same CSS that's provided to do
+ * right by your webfont.
+ *
+ * Note 3: Uncomment the code below and replace the values required by your webfont.
+ *
+ */
+
+/*
+@font-face {
+  font-family: 'REPLACE_WITH_CUSTOM_FONT';
+  src: url($fontDir + 'REPLACE_WITH_CUSTOM_FONT.eot');
+  src: url($fontDir + 'REPLACE_WITH_CUSTOM_FONT.eot?#iefix') format('embedded-opentype'),
+  url($fontDir + 'REPLACE_WITH_CUSTOM_FONT.woff') format('woff'),
+  local(REPLACE_WITH_CUSTOM_FONT), url($fontDir + 'REPLACE_WITH_CUSTOM_FONT.ttf') format('truetype'),
+  url($fontDir + 'REPLACE_WITH_CUSTOM_FONT.svg#REPLACE_WITH_CUSTOM_FONT') format('svg');
+  font-weight: normal !important; // 2
+  font-style: normal !important; // 2
+  font-variant: normal !important;
+  text-transform: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  font-display: swap;
+}
+*/

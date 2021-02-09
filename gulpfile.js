@@ -154,7 +154,9 @@ function scssTask() {
         .pipe(sass({
 			includePaths: ['node_modules']
 		})) // compile SCSS to CSS
-        .pipe(postcss([ autoprefixer(), cssnano() ])) // PostCSS plugins
+        .pipe(postcss([ autoprefixer(), cssnano({
+            preset: ['default', { minifyFontValues: false }],
+        }) ])) // PostCSS plugins
         .pipe(sourcemaps.write('.')) // write sourcemaps file in current directory
         .pipe(dest(directories.dist.css)) // put final CSS in dist folder
 	    .pipe(notify({

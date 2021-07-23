@@ -17,7 +17,7 @@ From there, you should put the contents of Static Kit in the appropriate directo
 
 Navigate to Static Kit directory and run `npm install`.
 
-### Configure Static Kit (optional)
+### Configure Static Kit via `statickit.json` (optional)
 
 By default, Static Kit has reasonable defaults. There are directories that come with the library to house your source Javascript files, SCSS files, and images. In addition, Static Kit will compile all assets to directories inside the Static Kit root directory, as well.
 

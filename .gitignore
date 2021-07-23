@@ -2,8 +2,3 @@
 node_modules
 package-lock.json
 static-kit-style-guide.html
-/.idea/codeStyles/codeStyleConfig.xml
-/.idea/modules.xml
-/.idea/static-kit.iml
-/.idea/vcs.xml
-/.idea/workspace.xml

@@ -17,13 +17,13 @@ $serif: serif;
  */
 * {
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: normal !important;
-  font-style: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
-  letter-spacing: normal !important;
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: normal;
   font-size: 14px;
   font-display: swap;
 }

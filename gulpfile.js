@@ -4,23 +4,29 @@
 
 // Initialize modules
 // Importing specific gulp API functions lets us write them below as series() instead of gulp.series()
-const { src, dest, watch, series, parallel } = require('gulp');
+import gulp from 'gulp';
+const { src, dest, watch, series, parallel } = gulp;
+
 // Importing all the Gulp-related packages we want to use
-const babelify = require('babelify');
-const browserify = require('browserify');
-const changed = require('gulp-changed')
-const colors = require('colors');
-const imagemin = require('gulp-imagemin');
-const sourcemaps = require('gulp-sourcemaps');
-const sass = require('gulp-sass');
-const uglify = require('gulp-uglify');
-const postcss = require('gulp-postcss');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
-const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
-const plumber = require('gulp-plumber');
-const notify = require('gulp-notify');
+import babelify from 'babelify';
+import browserify from 'browserify';
+import changed from 'gulp-changed';
+import colors from 'colors';
+import imagemin from 'gulp-imagemin';
+import sourcemaps from 'gulp-sourcemaps';
+
+import dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+const sass = gulpSass(dartSass);
+
+import uglify from 'gulp-uglify';
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import plumber from 'gulp-plumber';
+import notify from 'gulp-notify';
 
 
 /*****************************************
@@ -185,7 +191,8 @@ function watchTask() {
 // Export the default Gulp task so it can be run
 // Runs the images, scss and js tasks simultaneously
 // then watch task
-exports.default = series(
+const _default = series(
     parallel(imageMinTask, scssTask, jsTask),
     watchTask
 );
+export { _default as default };

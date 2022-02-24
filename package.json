@@ -11,7 +11,7 @@
     "build": "rollup -c --environment INCLUDE_DEPS,BUILD:prod",
     "build-babel": "rollup -c --environment INCLUDE_DEPS,BUILD:prod,TRANSFORM",
     "build-dev": "rollup -c --environment INCLUDE_DEPS,BUILD:dev",
-    "optimize": "node imagemin",
+    "optimize-images": "node imagemin",
     "watch": "rollup -c -w --watch.exclude 'node_modules/**' --environment INCLUDE_DEPS,BUILD:dev --silent",
     "watch-with-serve": "rollup -c -w --watch.exclude 'node_modules/**' --environment INCLUDE_DEPS,BUILD:dev,SERVE --silent",
     "serve-dev": "serve .",

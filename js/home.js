@@ -1,2 +1,26 @@
-!function r(t,i,l){function f(n,o){if(!i[n]){if(!t[n]){var e="function"==typeof require&&require;if(!o&&e)return e(n,!0);if(u)return u(n,!0);throw(o=new Error("Cannot find module '"+n+"'")).code="MODULE_NOT_FOUND",o}e=i[n]={exports:{}},t[n][0].call(e.exports,function(o){return f(t[n][1][o]||o)},e,e.exports,r,t,i,l)}return i[n].exports}for(var u="function"==typeof require&&require,o=0;o<l.length;o++)f(l[o]);return f}({1:[function(o,n,e){"use strict";console.info("Global: loading..."),console.info("Global: loaded.")},{}],2:[function(o,n,e){"use strict";o("./global");o="Home";console.info(o+": loading..."),console.info(o+": loaded.✨")},{"./global":1}]},{},[2]);
+/**
+ * Home page
+ * This file contains logic specific to a page / template.
+ * It is intended to ONLY be loaded on pages / templates that require
+ * this specific functionality.
+ **/
+
+// Import any global logic (optional)
+require('./global');
+
+const pageName = 'Home';
+
+// Intro
+console.info( pageName + ': loading...');
+
+/**
+ * Page-specific logic below
+ **/
+
+//...
+
+// Do not edit below this line...
+
+// Outro
+console.info( pageName + ': loaded.✨');
 //# sourceMappingURL=home.js.map

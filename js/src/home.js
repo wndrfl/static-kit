@@ -5,6 +5,8 @@
  * this specific functionality.
  **/
 
+import '../../css/src/home.scss'
+
 // Import any global logic (optional)
 require('./global');
 

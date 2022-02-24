@@ -8,25 +8,70 @@ import serve from 'rollup-plugin-serve'; // https://www.npmjs.com/package/rollup
 import livereload from 'rollup-plugin-livereload'; // https://github.com/thgh/rollup-plugin-livereload & https://www.npmjs.com/package/livereload - JS Object with options towards bottom
 
 const production    = process.env.BUILD === 'prod'; // console.log(process.env.TRANSFORM, production, process.env.INCLUDE_DEPS, process.env.BUILD)
-const pages         = new Set(['home']);
-const pages_cleaned = Array.from(pages);
-const max           = pages_cleaned.length;
+
+// Import our per-project configurations
+let config;
+try {
+	config = require('./statickit.json');
+} catch(err) {}
+
+// A dictionary of various directories
+const directories = {
+	dist : {
+		css : './css/',
+		images : './images/',
+		js : './js/',
+	},
+	src : {
+		images : 'images/src/',
+		js : 'js/src/',
+		scss : 'css/src/'
+	}
+};
+
+// Allow for overwrites
+if(config && config.paths) {
+	if(config.paths.dist) {
+		for(var i in config.paths.dist) {
+			if(directories.dist[i]) {
+				directories.dist[i] = config.paths.dist[i];
+			}
+		}
+	}
+	if(config.paths.src) {
+		for(var i in config.paths.src) {
+			if(directories.src[i]) {
+				directories.src[i] = config.paths.src[i];
+			}
+		}
+	}
+}
+
+let files = [
+	//
+];
+
+if(config) {
+	files = [...files, config.files];
+}
+
+const max = files.length;
 for (let i = 0; i < max; i++) {
-	pages_cleaned[i] = {
-		input: `js/src/${pages_cleaned[i]}.js`,
+	files[i] = {
+		input: `${directories.src.js}${files[i]}.js`,
 		output: {
-			file: production === true ? `js/min-${pages_cleaned[i]}.js` : `js/${pages_cleaned[i]}.js`,
+			file: production === true ? `${directories.dist.js}min-${files[i]}.js` : `${directories.dist.js}${files[i]}.js`,
 			format: 'es',
 			sourcemap: true
 		},
-		plugins: getPlugins(pages_cleaned[i])
+		plugins: getPlugins(files[i])
 	};
 }
 
 /**
  * @type {import('rollup').RollupOptions}
  */
-export default pages_cleaned;
+export default files;
 
 /**
  * getPlugins --- Return global plugins Array and customize for each bundle
@@ -62,6 +107,6 @@ function getPlugins(page) {
 		process.env.SERVE && livereload({
 			port: 10001
 			// exts:['png']
-		}),
+		})
 	]
 }

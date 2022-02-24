@@ -5,7 +5,7 @@
 // Initialize modules
 // Importing specific gulp API functions lets us write them below as series() instead of gulp.series()
 import gulp from 'gulp';
-const { src, dest, watch, series, parallel } = gulp;
+const { src, dest, watch, series, task, parallel } = gulp;
 
 // Importing all the Gulp-related packages we want to use
 import babelify from 'babelify';
@@ -71,15 +71,6 @@ if(config && config.paths) {
 	}
 }
 
-// A dictionary of important files
-const files = {
-	src : {
-		js : directories.src.js + 'scripts.js',
-		scss : directories.src.scss + 'styles.scss'
-	}
-}
-
-
 
 /*****************************************
 * NOTIFICATIONS / LOGGING
@@ -116,6 +107,70 @@ function showErrorNotification(err) {
 * GULP TASKS
 *****************************************/
 
+const cssFiles = {
+	'home' : directories.src.scss + 'home.scss',
+};
+
+for (const [name, file] of Object.entries(cssFiles)) {
+
+	const buildTaskName = 'build:css:' + name;
+
+	task(buildTaskName, () => {
+
+	    return src(file)
+	        .pipe(plumber({ errorHandler: showErrorNotification}))
+	        .pipe(sourcemaps.init()) // initialize sourcemaps first
+	        .pipe(sass({
+				includePaths: ['node_modules']
+			})) // compile SCSS to CSS
+	        .pipe(postcss([ autoprefixer(), cssnano({
+	            preset: ['default', { minifyFontValues: false }],
+	        }) ])) // PostCSS plugins
+	        .pipe(sourcemaps.write('.')) // write sourcemaps file in current directory
+	        .pipe(dest(directories.dist.css)) // put final CSS in dist folder
+		    .pipe(notify({
+		        title: '👍 Order up!',
+		        message:  buildTaskName + ' successfully compiled',
+		    	icon: icon,
+		    	onLast: true    
+		    }));
+	});
+};
+
+
+
+
+const jsFiles = {
+	'home' : directories.src.js + 'home.js',
+};
+
+for (const [name, file] of Object.entries(jsFiles)) {
+
+	const buildTaskName = 'build:js:' + name;
+
+	task(buildTaskName, () => {
+
+		let bundler = browserify({
+			entries: [file]
+		}).transform('babelify', {presets: ['@babel/preset-env']});
+
+		return bundler.bundle()
+			.pipe(plumber({ errorHandler: showErrorNotification}))
+			.pipe(source(name + '.js'))
+			.pipe(buffer())
+			.pipe(sourcemaps.init())
+			.pipe(uglify())
+			.pipe(sourcemaps.write('./'))
+			.pipe(dest(directories.dist.js))
+			.pipe(notify({
+				title: '👍 Order up!',
+				message:  buildTaskName + ' successfully compiled',
+				icon: icon,
+				onLast: true
+			}));
+	});
+};
+
 // Image minification task: optimizes images for web and saves as a separate file
 function imageMinTask() {
 	return src(directories.src.images + '*')
@@ -131,68 +186,42 @@ function imageMinTask() {
 	    }));
 }
 
-// JS task: concatenates and uglifies JS files to script.js
-function jsTask() {
-
-	let bundler = browserify(files.src.js).transform('babelify', {presets: ['@babel/preset-env']});
-
-    return bundler.bundle()
-        .pipe(plumber({ errorHandler: showErrorNotification}))
-	    .pipe(source('scripts.js'))
-	    .pipe(buffer())
-	    .pipe(sourcemaps.init())
-	    .pipe(uglify())
-	    .pipe(sourcemaps.write('./'))
-	    .pipe(dest(directories.dist.js))
-	    .pipe(notify({
-	        title: '👍 Order up!',
-	        message:  'Javascript successfully compiled',
-	    	icon: icon,
-	    	onLast: true    
-	    }));
-}
-
-// Sass task: compiles the styles.scss file into styles.css
-function scssTask() {
-    return src(files.src.scss)
-        .pipe(plumber({ errorHandler: showErrorNotification}))
-        .pipe(sourcemaps.init()) // initialize sourcemaps first
-        .pipe(sass({
-			includePaths: ['node_modules']
-		})) // compile SCSS to CSS
-        .pipe(postcss([ autoprefixer(), cssnano({
-            preset: ['default', { minifyFontValues: false }],
-        }) ])) // PostCSS plugins
-        .pipe(sourcemaps.write('.')) // write sourcemaps file in current directory
-        .pipe(dest(directories.dist.css)) // put final CSS in dist folder
-	    .pipe(notify({
-	        title: '👍 Order up!',
-	        message:  'Scss successfully compiled',
-	    	icon: icon,
-	    	onLast: true    
-	    }));
-}
-
 // Watch task: watch SCSS and JS files for changes
 // If any change, run scss and js tasks simultaneously
 function watchTask() {
-    watch([
-	    	directories.src.images + '**/*.*', 
-	    	directories.src.scss + '**/*.scss', 
-	    	directories.src.js + '**/*.js'
-    	],
-        {interval: 1000, usePolling: true}, //Makes docker work
-        series(
-            parallel(imageMinTask, scssTask, jsTask)
-        )
-    );    
+
+	// Watch Javascript files
+	watch([directories.src.js],
+		{interval: 1000, usePolling: true}, // Makes docker work
+		series(
+			parallel(Object.keys(jsFiles).map((v) => { return 'build:js:' + v; }))
+		)
+	);
+
+	// Watch Scss files
+	watch([directories.src.scss],
+		{interval: 1000, usePolling: true}, // Makes docker work
+		series(
+			parallel(Object.keys(cssFiles).map((v) => { return 'build:css:' + v; }))
+		)
+	);
+
+	// Watch image files
+	watch([directories.src.images],
+		{interval: 1000, usePolling: true}, // Makes docker work
+		series(imageMinTask)
+	);
 }
 
 // Export the default Gulp task so it can be run
 // Runs the images, scss and js tasks simultaneously
 // then watch task
 const _default = series(
-    parallel(imageMinTask, scssTask, jsTask),
-    watchTask
+	parallel(
+		[imageMinTask]
+		.concat(Object.keys(jsFiles).map((v) => { return 'build:js:' + v; }))
+		.concat(Object.keys(jsFiles).map((v) => { return 'build:css:' + v; }))
+	),
+	watchTask
 );
 export { _default as default };

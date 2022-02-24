@@ -1,0 +1,20 @@
+.theme-rte {
+
+	* {
+		color:$color-white;
+	}
+
+	p {
+		@extend %paragraph;
+	}
+
+	ul {
+		list-style:disc;
+
+		li {
+			font-size:16px;
+			font-weight:400;
+			line-height:24px;
+		}
+	}
+}

@@ -1,0 +1,36 @@
+.theme-button {
+	border:0;
+	background-color: $color-black;
+	color: $color-white;
+	text-align: center;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	text-transform: uppercase;
+	line-height: 40px;
+	display: inline-block;
+	width: auto;
+	height: auto;
+	margin:0;
+	padding:0 20px;
+	white-space: nowrap;
+	cursor: pointer;
+	outline: none;
+	overflow-x: hidden;
+
+	&:link,
+	&:visited {
+	   background: $color-black;
+	   color: $color-white;
+	}
+
+	&:active,
+	&:focus,
+	&:hover {
+	   background: $color-grey;
+	   color: $color-black;
+	}
+
+	&.full-width {
+		display:block;
+	}
+}

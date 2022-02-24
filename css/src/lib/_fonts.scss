@@ -4,8 +4,8 @@
 // ▒ Fonts --- Home to any custom webfonts + preferred font properties
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-$sans-serif: "Open Sans",sans-serif;
-$serif: serif;
+$font-sans-serif: "Open Sans",sans-serif;
+$font-serif: serif;
 
 /**
  * Set preferred font properties across the board
@@ -16,7 +16,7 @@ $serif: serif;
  * it will swap to that.
  */
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: $font-sans-serif;
   font-weight: normal;
   font-style: normal;
   font-variant: normal;

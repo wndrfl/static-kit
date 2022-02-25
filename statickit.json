@@ -1,20 +1,14 @@
 {
-	"files" : [
-		"home"
-	],
-	"paths" : {
-
-		"dist" : {
-			"css" : "css/",
-			"images" : "images/",
-			"js" : "js/"
+	"paths": {
+		"dist": {
+			"css": "dist/css",
+			"images": "dist/images",
+			"js": "dist/js"
 		},
-
-		"src" : {
-			"images" : "images/src/",
-			"js" : "js/src/",
-			"scss" : "css/src/"
+		"src": {
+			"images": "src/images",
+			"js": "src/js",
+			"scss": "src/css"
 		}
-
 	}
 }

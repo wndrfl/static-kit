@@ -6,7 +6,7 @@
  **/
 
 // Import any global logic (optional)
-require('./global');
+require('./lib/global');
 
 const pageName = 'Home';
 

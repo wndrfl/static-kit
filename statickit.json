@@ -2,15 +2,15 @@
 	"paths" : {
 
 		"dist" : {
-			"css" : "css/",
-			"images" : "images/",
-			"js" : "js/"
+			"css" : "css",
+			"images" : "images",
+			"js" : "js"
 		},
 
 		"src" : {
-			"images" : "images/src/",
-			"js" : "js/src/",
-			"scss" : "css/src/"
+			"images" : "images/src",
+			"js" : "js/src",
+			"scss" : "css/src"
 		}
 
 	}

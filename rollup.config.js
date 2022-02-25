@@ -57,7 +57,7 @@ const jsFiles = fs
 	.readdirSync(path.join(__dirname, directories.src.js))
 	.filter(file => path.extname(file).toLowerCase() === '.js');
 
-const pages_config = [];
+const pagesConfig = [];
 
 
 cssFiles.forEach(file => {
@@ -118,4 +118,4 @@ jsFiles.forEach((file, i) => {
 /**
  * @type {import('rollup').RollupOptions}
  */
-export default pages_config;
+export default pagesConfig;

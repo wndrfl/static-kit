@@ -5,6 +5,8 @@
  * this specific functionality.
  **/
 
+import '../css/home.scss'
+
 // Import any global logic (optional)
 require('./global');
 
@@ -23,4 +25,3 @@ console.info( pageName + ': loading...');
 
 // Outro
 console.info( pageName + ': loaded.✨');
-//# sourceMappingURL=home.js.map

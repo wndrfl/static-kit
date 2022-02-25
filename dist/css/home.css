@@ -812,4 +812,35 @@ body.no-scroll {
   overflow: hidden;
 }
 
+.theme-button {
+  border: 0;
+  background-color: #30261D;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  line-height: 40px;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  overflow-x: hidden;
+}
+.theme-button:link, .theme-button:visited {
+  background: #30261D;
+  color: #fff;
+}
+.theme-button:active, .theme-button:focus, .theme-button:hover {
+  background: #D1D3D4;
+  color: #30261D;
+}
+.theme-button.full-width {
+  display: block;
+}
+
 /*# sourceMappingURL=home.css.map */

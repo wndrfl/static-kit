@@ -15,7 +15,10 @@
     "colors": "^1.4.0",
     "esbuild": "^0.14.23",
     "esbuild-plugin-sass": "^1.0.1",
-    "fast-glob": "^3.2.11"
+    "fast-glob": "^3.2.11",
+    "imagemin": "^8.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2"
   },
   "author": "",
   "license": "ISC"

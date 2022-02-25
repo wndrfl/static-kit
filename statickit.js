@@ -1,7 +1,9 @@
-const esbuild = require("esbuild");
-const sassPlugin = require("esbuild-plugin-sass");
 const chokidar = require("chokidar");
+const esbuild = require("esbuild");
 const fg = require('fast-glob');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminPngquant = require('imagemin-pngquant');
+const sassPlugin = require("esbuild-plugin-sass");
 // const browserSync = require("browser-sync").create();
 
 
@@ -47,9 +49,8 @@ if(config && config.paths) {
   }
 }
 
-const buildAll = () => {
-  buildScss();
-  buildJs();
+const delay = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // Build all Javascript fiels
@@ -80,6 +81,8 @@ const buildJs = async () => {
   } catch (error) {
     console.log(error);
   }
+
+  return true;
 };
 
 // Build all SCSS files
@@ -109,33 +112,90 @@ const buildScss = async () => {
   } catch (error) {
     console.log(error);
   }
+
+  return true;
 };
 
+// Optimize all images
+// https://github.com/imagemin/imagemin/issues/380#issuecomment-898220983
+const optimizeImages = async () => {
 
-buildAll();
+  console.log('Optimizing images...');
 
-//watch it?
-if (process.argv.includes("--watch")) {
-
-  console.log("Watching files... n");
-
-  // Listen for JS changes
-  const jsWatcher = chokidar.watch([`${directories.src.js}/**/*.js`]);
-  jsWatcher.on("change", () => {
-    buildJs();
+  const imagemin = (await import('imagemin')).default;
+  const files = await imagemin([`${directories.src.images}/**/*.{jpg,png}`], {
+    destination: `${directories.dist.images}`,
+    plugins: [
+      imageminJpegtran(),
+      imageminPngquant({
+        quality: [0.6, 0.8]
+      })
+    ]
   });
 
-  // Listen for SCSS changes
-  const scssWatcher = chokidar.watch([`${directories.src.scss}/**/*.scss`]);
-  scssWatcher.on("change", () => {
-    buildScss();
+  files.forEach((file) => {
+    console.info(file.sourcePath + ' => ' + file.destinationPath);
   });
 
-  // //browserSync will trigger livereload when build files are updated
-  // browserSync.init({
-  //   //TODO: make these values passed in by `npm run dev`
-  //   port: 3334,
-  //   proxy: "localhost:3333",
-  //   files: ["assets/build/*"],
-  // });
+  return true;
 }
+
+const run = async () => {
+  await buildScss();
+  await buildJs();
+  await optimizeImages();
+  return true;
+};
+
+// Go!
+run().then(async () => {
+
+  // Live reload?
+  // if (process.argv.includes("--reload")) {
+
+  //   console.log("Setting up live reload...");
+
+    // //browserSync will trigger livereload when build files are updated
+    // browserSync.init({
+    //   //TODO: make these values passed in by `npm run dev`
+    //   port: 3334,
+    //   proxy: "localhost:3333",
+    //   files: ["assets/build/*"],
+    // });
+  // }
+  
+  // Watch files?
+  if (process.argv.includes("--watch")) {
+
+    console.log("Watching files...");
+
+    // Listen for Image changes
+    const imgWatcher = chokidar.watch([`${directories.src.images}/*.{jpg,png}`]);
+    imgWatcher
+      .on("change", (path, stats) => { 
+        if (stats) console.log(`Image ${path} changed size to ${stats.size}`);
+        optimizeImages();
+      });
+
+    // Listen for JS changes
+    const jsWatcher = chokidar.watch([`${directories.src.js}/**/*.js`]);
+    jsWatcher.on("change", () => {
+      buildJs();
+    });
+
+    // Listen for SCSS changes
+    const scssWatcher = chokidar.watch([`${directories.src.scss}/**/*.scss`]);
+    scssWatcher.on("change", () => {
+      buildScss();
+    });
+
+    // //browserSync will trigger livereload when build files are updated
+    // browserSync.init({
+    //   //TODO: make these values passed in by `npm run dev`
+    //   port: 3334,
+    //   proxy: "localhost:3333",
+    //   files: ["assets/build/*"],
+    // });
+  }
+
+});

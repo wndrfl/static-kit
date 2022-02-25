@@ -20,14 +20,14 @@ try {
 // A dictionary of various directories
 const directories = {
   dist : {
-    css : './css',
-    images : './images',
-    js : './js',
+    css : './dist/css',
+    images : './dist/images',
+    js : './dist/js',
   },
   src : {
-    images : 'images/src',
-    js : 'js/src',
-    scss : 'css/src'
+    images : 'src/images',
+    js : 'src/js',
+    scss : 'src/scss'
   }
 };
 
@@ -163,7 +163,7 @@ run().then(async () => {
     //   files: ["assets/build/*"],
     // });
   // }
-  
+
   // Watch files?
   if (process.argv.includes("--watch")) {
 

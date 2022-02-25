@@ -2,7 +2,7 @@
 
 Static Kit is a simple, standardized toolkit to aid in the creation and compilation of various static assets (Javascript, CSS, or images) for traditional frontends of all kinds.
 
-This library is simply an organizational wrapper to minimize and noramlize the process of setting up common development tools. Under the hood, Static Kit leans heavily on [Gulp](https://gulpjs.com/) for the various compilation and optimization tasks.
+This library is simply an organizational wrapper to minimize and noramlize the process of setting up common development tools. Under the hood, Static Kit leans heavily on [esbuild](https://esbuild.github.io/) for the various compilation and optimization tasks.
 
 ## Installation
 
@@ -25,8 +25,10 @@ That said, it is possible to easily configure the paths for both the source and 
 
 ## Using Static Kit in Development
 
-Static Kit is preset for easy Javascript and CSS (SCSS) development. By default, all coding should be done in the `./js/src` or `./css/src` directories, respectively. In addition, Static Kit will automatically optimize images that are placed in the `./images/src` directory.
+Static Kit is preset for easy Javascript and CSS (SCSS) development. By default, all coding should be done in the `./src/js` or `./src/scss` directories, respectively. In addition, Static Kit will automatically optimize images that are placed in the `./src/images` directory.
 
-To begin development, simply run `gulp` from your Static Kit directory.
+To begin development, simply run `npm run dev` from your Static Kit directory. This will compile all files, and watch for changes.
 
-Gulp is preconfigured to watch your files and compile any static assets to the directories that are set in your `statickit.json` file.
+To only complile, run `npm run build`.
+
+Static Kit is preconfigured to watch your files and compile any static assets to the directories that are set in your `statickit.json` file.

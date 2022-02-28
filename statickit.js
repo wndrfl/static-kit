@@ -1,10 +1,10 @@
 const chokidar = require("chokidar");
 const esbuild = require("esbuild");
-const fg = require('fast-glob');
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminPngquant = require('imagemin-pngquant');
+const fg = require("fast-glob");
+const fs = require("fs");
+const imageminJpegtran = require("imagemin-jpegtran");
+const imageminPngquant = require("imagemin-pngquant");
 const sassPlugin = require("esbuild-plugin-sass");
-// const browserSync = require("browser-sync").create();
 
 
 /*****************************************
@@ -14,7 +14,8 @@ const sassPlugin = require("esbuild-plugin-sass");
 // Import our per-project configurations
 let config;
 try {
-  config = require('./statickit.json');
+  const data = fs.readFileSync("./.static");
+  config = JSON.parse(data);
 } catch(err) {}
 
 // A dictionary of various directories
@@ -120,9 +121,9 @@ const buildScss = async () => {
 // https://github.com/imagemin/imagemin/issues/380#issuecomment-898220983
 const optimizeImages = async () => {
 
-  console.log('Optimizing images...');
+  console.log("Optimizing images...");
 
-  const imagemin = (await import('imagemin')).default;
+  const imagemin = (await import("imagemin")).default;
   const files = await imagemin([`${directories.src.images}/**/*.{jpg,png}`], {
     destination: `${directories.dist.images}`,
     plugins: [
@@ -150,20 +151,6 @@ const run = async () => {
 // Go!
 run().then(async () => {
 
-  // Live reload?
-  // if (process.argv.includes("--reload")) {
-
-  //   console.log("Setting up live reload...");
-
-    // //browserSync will trigger livereload when build files are updated
-    // browserSync.init({
-    //   //TODO: make these values passed in by `npm run dev`
-    //   port: 3334,
-    //   proxy: "localhost:3333",
-    //   files: ["assets/build/*"],
-    // });
-  // }
-
   // Watch files?
   if (process.argv.includes("--watch")) {
 
@@ -188,14 +175,6 @@ run().then(async () => {
     scssWatcher.on("change", () => {
       buildScss();
     });
-
-    // //browserSync will trigger livereload when build files are updated
-    // browserSync.init({
-    //   //TODO: make these values passed in by `npm run dev`
-    //   port: 3334,
-    //   proxy: "localhost:3333",
-    //   files: ["assets/build/*"],
-    // });
   }
 
 });

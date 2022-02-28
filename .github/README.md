@@ -17,11 +17,11 @@ From there, you should put the contents of Static Kit in the appropriate directo
 
 Navigate to Static Kit directory and run `npm install`.
 
-### Configure Static Kit via `statickit.json` (optional)
+### Configure Static Kit via `static.json` (optional)
 
 By default, Static Kit has reasonable defaults. There are directories that come with the library to house your source Javascript files, SCSS files, and images. In addition, Static Kit will compile all assets to directories inside the Static Kit root directory, as well.
 
-That said, it is possible to easily configure the paths for both the source and destination directories by editing the `statickit.json` file in the root of the Static Kit library. This is helpful, for instance, if your project requires these files to live outside of Static Kit.
+That said, it is possible to easily configure the paths for both the source and destination directories by editing the `static.json` file in the root of the Static Kit library. This is helpful, for instance, if your project requires these files to live outside of Static Kit.
 
 ## Using Static Kit in Development
 
@@ -31,4 +31,4 @@ To begin development, simply run `npm run dev` from your Static Kit directory. T
 
 To only complile, run `npm run build`.
 
-Static Kit is preconfigured to watch your files and compile any static assets to the directories that are set in your `statickit.json` file.
+Static Kit is preconfigured to watch your files and compile any static assets to the directories that are set in your `static.json` file.

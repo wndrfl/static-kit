@@ -1,3 +1,13 @@
+/**
+ * Static Kit
+ * 
+ * This file configures Static Kit's different build tasks.
+ * 
+ * To customize various Static Kit options, please edit the
+ * configuration file at .static, which is located in the same
+ * directory as this file.
+ **/
+
 const chokidar = require("chokidar");
 const esbuild = require("esbuild");
 const fg = require("fast-glob");

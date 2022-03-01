@@ -11,6 +11,7 @@
     "dev": "node statickit --watch"
   },
   "devDependencies": {
+    "bootstrap": "^5.1.3",
     "chokidar": "^3.5.3",
     "colors": "^1.4.0",
     "esbuild": "^0.14.23",
@@ -18,7 +19,8 @@
     "fast-glob": "^3.2.11",
     "imagemin": "^8.0.1",
     "imagemin-jpegtran": "^7.0.0",
-    "imagemin-pngquant": "^9.0.2"
+    "imagemin-pngquant": "^9.0.2",
+    "sass": "^1.49.9"
   },
   "author": "",
   "license": "ISC"

@@ -14,7 +14,7 @@ const fg = require("fast-glob");
 const fs = require("fs");
 const imageminJpegtran = require("imagemin-jpegtran");
 const imageminPngquant = require("imagemin-pngquant");
-const sassPlugin = require("esbuild-plugin-sass");
+const sass = require('sass');
 
 
 /*****************************************
@@ -60,21 +60,36 @@ if(config && config.paths) {
   }
 }
 
-const delay = (ms) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
+// Get all the main JS build files
+const getJsBuildFiles = async () => {
+  return await fg([`${directories.src.js}/*.js`]);
 }
 
-// Build all Javascript fiels
-const buildJs = async () => {
+// Get all the main SCSS build files
+const getScssBuildFiles = async () => {
+  return await fg([`${directories.src.scss}/*.scss`]);
+}
 
-  console.log("Building JS...");
+
+/**
+ * Tasks
+ **/
+
+// Build all Javascript fiels
+const buildJs = async (file) => {
+
+  if(file) {
+    console.log(`Building ${file}`);
+  }else{
+    console.log(`Building Javascript: ${directories.src.js}`);
+  }
   
   try {
 
     const timerStart = Date.now();
 
     // Get the files
-    const files = await fg([`${directories.src.js}/*.js`]);
+    const files = file ? [file] : await getJsBuildFiles();
 
     // Build code
     await esbuild.build({
@@ -97,25 +112,53 @@ const buildJs = async () => {
 };
 
 // Build all SCSS files
-const buildScss = async () => {
+const buildScss = async (file) => {
 
-  console.log("Building SCSS...");
+  if(file) {
+    console.log(`Building ${file}`);
+  }else{
+    console.log(`Building SCSS: ${directories.src.scss}`);
+  }
 
   try {
 
     const timerStart = Date.now();
 
     // Get the files
-    const files = await fg([`${directories.src.scss}/*.scss`]);
+    const files = file ? [file] : await getScssBuildFiles();
 
     // Build code
-    await esbuild.build({
-      entryPoints: files,
-      bundle: true,
-      minify: true,
-      outdir: `${directories.dist.css}/`,
-      plugins: [sassPlugin()]
-    });
+    for(var i in files) {
+      const file = files[i];
+      const result = await sass.compileAsync(file, {
+        loadPaths: ["node_modules"],
+        sourceMap: true,
+        style: "compressed"
+      });
+      const filename = file.split(/[\\/]/).pop();
+      const filenameParts = filename.split('.');
+      filenameParts.pop();
+      const cssFilename = `${filenameParts.join('.')}.css`;
+      const cssFilePath = `${directories.dist.css}/${cssFilename}`;
+      await fs.writeFile(`${cssFilePath}`, result.css, err => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      });
+
+      if(result.sourceMap) {
+        const cssSourceMapFilename = `${filenameParts.join('.')}.map.css`;
+        const cssSourceMapFilePath = `${directories.dist.css}/${cssSourceMapFilename}`;
+        await fs.writeFile(`${cssSourceMapFilePath}`, JSON.stringify(result.sourceMap), err => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+        });
+      }
+      console.info(`Compiled: ${file} => ${cssFilePath}`);
+    }
 
     const timerEnd = Date.now();
     console.log(`SCSS done! Built in ${timerEnd - timerStart}ms.`);
@@ -162,29 +205,36 @@ const run = async () => {
 run().then(async () => {
 
   // Watch files?
-  if (process.argv.includes("--watch")) {
+  if(process.argv.includes("--watch")) {
 
     console.log("Watching files...");
 
     // Listen for Image changes
-    const imgWatcher = chokidar.watch([`${directories.src.images}/*.{jpg,png}`]);
-    imgWatcher
-      .on("change", (path, stats) => { 
-        if (stats) console.log(`Image ${path} changed size to ${stats.size}`);
-        optimizeImages();
-      });
+    chokidar.watch([`${directories.src.images}/*.{jpg,png}`]).on("change", (path, stats) => { 
+      if (stats) console.log(`Image ${path} changed size to ${stats.size}`);
+      optimizeImages();
+    });
 
     // Listen for JS changes
-    const jsWatcher = chokidar.watch([`${directories.src.js}/**/*.js`]);
-    jsWatcher.on("change", () => {
-      buildJs();
+    chokidar.watch([`${directories.src.js}/**/*.js`]).on("change", async (path, stats) => {
+      const files = await getJsBuildFiles();
+      if(files.includes(path)) {
+        buildJs(path);
+      } else {
+        buildJs();
+      }
     });
 
     // Listen for SCSS changes
-    const scssWatcher = chokidar.watch([`${directories.src.scss}/**/*.scss`]);
-    scssWatcher.on("change", () => {
-      buildScss();
+    chokidar.watch([`${directories.src.scss}/**/*.scss`]).on("change", async (path, stats) => {
+      const files = await getScssBuildFiles();
+      if(files.includes(path)) {
+        buildScss(path);
+      } else {
+        buildScss();
+      }
     });
+
   }
 
 });

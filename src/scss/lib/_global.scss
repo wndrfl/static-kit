@@ -5,13 +5,13 @@
 // Import the Bootstrap 4 grid (optional)
 // @import 'bootstrap/scss/bootstrap-grid';
 
-@import 'lib/normalize';
-@import 'lib/pallette';
+@import './normalize';
+@import './pallette';
 
 // CSS used by the WordPress WYSIWYG (https://codex.wordpress.org/CSS)
 // If this is a WordPress Project, you should
 // uncomment the below @import
-// @import 'lib/wordpress';
+// @import './wordpress';
 
 
 
@@ -21,7 +21,7 @@
 
 // Import Google Fonts (optional - comment or update as needed)
 // @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
-@import 'lib/fonts'; // This file should be updated if the above @import changes
+@import './fonts'; // This file should be updated if the above @import changes
 
 
 
@@ -29,8 +29,8 @@
 // Extensions and Mixins
 /////////////////////////////
 
-@import 'lib/mixins';
-@import 'lib/extensions';
+@import './mixins';
+@import './extensions';
 
 
 
@@ -38,10 +38,10 @@
 // Partials
 /////////////////////////////
 
-@import 'partials/theme-button';
-@import 'partials/theme-header';
-@import 'partials/theme-headline';
-@import 'partials/theme-rte';
+@import '../partials/theme-button';
+@import '../partials/theme-header';
+@import '../partials/theme-headline';
+@import '../partials/theme-rte';
 
 *,
 a,

@@ -1,0 +1,17 @@
+{
+	"paths" : {
+
+		"dist" : {
+			"css" : "dist/css",
+			"images" : "dist/images",
+			"js" : "dist/js"
+		},
+
+		"src" : {
+			"images" : "src/images",
+			"js" : "src/js",
+			"scss" : "src/scss"
+		}
+
+	}
+}

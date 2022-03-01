@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/js/lib/global.js", "../../src/js/home.js"],
+  "sourcesContent": ["/**\n * Global Functionality\n * The logic in this is intended to ONLY contain any functionality\n * that is required on every page load.\n * \n * NOTE: Please do not include any page-specific logic here.\n **/\n\n// Intro\nconsole.info('Global: loading...');\n\n/**\n * Global logic, below:\n **/\n\n//...\n\n// Do not edit below this line...\n\n// Outro\nconsole.info('Global: loaded.');", "/**\n * Home page\n * This file contains logic specific to a page / template.\n * It is intended to ONLY be loaded on pages / templates that require\n * this specific functionality.\n **/\n\n// Import any global logic (optional)\nrequire('./lib/global');\n\nconst pageName = 'Home';\n\n// Intro\nconsole.info( pageName + ': loading...');\n\n/**\n * Page-specific logic below\n **/\n\n//...\n\n// Do not edit below this line...\n\n// Outro\nconsole.info( pageName + ': loaded.\u2728');\n"],
+  "mappings": "8DAAA,aASA,QAAQ,KAAK,sBAWb,QAAQ,KAAK,qBCZb,IAEA,GAAM,GAAW,OAGjB,QAAQ,KAAM,EAAW,gBAWzB,QAAQ,KAAM,EAAW",
+  "names": []
+}

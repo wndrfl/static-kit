@@ -140,7 +140,10 @@ const buildScss = async (file) => {
       filenameParts.pop();
       const cssFilename = `${filenameParts.join('.')}.css`;
       const cssFilePath = `${directories.dist.css}/${cssFilename}`;
-      await fs.writeFile(`${cssFilePath}`, result.css, err => {
+      const cssSourceMapFilename = `${filenameParts.join('.')}.css.map`;
+      const css = `${result.css}
+/*# sourceMappingURL=${cssSourceMapFilename} */`;
+      await fs.writeFile(`${cssFilePath}`, css, err => {
         if (err) {
           console.error(err);
           return;
@@ -148,7 +151,6 @@ const buildScss = async (file) => {
       });
 
       if(result.sourceMap) {
-        const cssSourceMapFilename = `${filenameParts.join('.')}.map.css`;
         const cssSourceMapFilePath = `${directories.dist.css}/${cssSourceMapFilename}`;
         await fs.writeFile(`${cssSourceMapFilePath}`, JSON.stringify(result.sourceMap), err => {
           if (err) {

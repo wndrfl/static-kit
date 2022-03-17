@@ -99,6 +99,7 @@ const buildJs = async (file) => {
       minify: true,
       outdir: `${directories.dist.js}/`,
       sourcemap: true,
+      target: "es2020"
     });
 
     const timerEnd = Date.now();

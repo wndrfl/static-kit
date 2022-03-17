@@ -1,5 +1,5 @@
-let eventMixin = {
-  
+export default {
+
   /**
    * Subscribe to event, usage:
    *  menu.on('select', function(item) { ... }
@@ -38,6 +38,5 @@ let eventMixin = {
     // call the handlers
     this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
   }
-};
 
-module.exports = eventMixin;
+};

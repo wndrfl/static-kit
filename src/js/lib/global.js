@@ -2,20 +2,33 @@
  * Global Functionality
  * The logic in this is intended to ONLY contain any functionality
  * that is required on every page load.
- * 
+ *
  * NOTE: Please do not include any page-specific logic here.
  **/
 
-// Intro
-console.info('Global: loading...');
+import Logger from "../lib/Logger";
 
-/**
- * Global logic, below:
- **/
+export default function () {
+  const NAME = 'Global';
+  Logger.info(`${NAME} > loading…`);
 
-//...
+  // Vars
+  // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-// Do not edit below this line...
 
-// Outro
-console.info('Global: loaded.');
+  // Logic
+  // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+  /**
+   * init --- Initialization block
+   */
+  function init() {
+    Logger.info(`${NAME} > init`);
+  }
+
+  // Do not edit below this line...
+  // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+  Logger.info(`${NAME} > loaded.`);
+
+  init();
+}

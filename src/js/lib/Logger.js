@@ -24,7 +24,7 @@ class Logger {
   // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
   static error(message, ...args) {
-  	console.info("%c" + message, this.styleError, ...args)
+  	console.trace("%c" + message, this.styleError, ...args)
   }
 
   static info(message, ...args) {
@@ -39,7 +39,7 @@ class Logger {
 	 * Class static initialization block
 	 */
 	static {
-		Logger.info(`${this.NAME} > init.`);
+		Logger.info(`${this.NAME} > init`);
 	}
 }
 export default Logger;

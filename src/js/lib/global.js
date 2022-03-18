@@ -10,7 +10,7 @@ import Logger from "../lib/Logger";
 
 export default function () {
   const NAME = 'Global';
-  Logger.info(`${NAME} > loading…`);
+  Logger.info(`${NAME} > loading`);
 
   // Vars
   // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -28,7 +28,7 @@ export default function () {
 
   // Do not edit below this line...
   // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-  Logger.info(`${NAME} > loaded.`);
+  Logger.info(`${NAME} > loaded`);
 
   init();
 }

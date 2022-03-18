@@ -31,9 +31,9 @@ try {
 // A dictionary of various directories
 const directories = {
   dist : {
-    css : './dist/css',
-    images : './dist/images',
-    js : './dist/js',
+    css : 'dist/css',
+    images : 'dist/images',
+    js : 'dist/js',
   },
   src : {
     images : 'src/images',
@@ -136,6 +136,7 @@ const buildScss = async (file) => {
         sourceMap: true,
         style: "compressed"
       });
+
       const filename = file.split(/[\\/]/).pop();
       const filenameParts = filename.split('.');
       filenameParts.pop();
@@ -144,6 +145,7 @@ const buildScss = async (file) => {
       const cssSourceMapFilename = `${filenameParts.join('.')}.css.map`;
       const css = `${result.css}
 /*# sourceMappingURL=${cssSourceMapFilename} */`;
+
       await fs.writeFile(`${cssFilePath}`, css, err => {
         if (err) {
           console.error(err);
@@ -152,6 +154,11 @@ const buildScss = async (file) => {
       });
 
       if(result.sourceMap) {
+      	const searchStr = `src/scss/`;
+      	const re = new RegExp(`/(.*(?=${directories.src.scss}))/g`,"g");
+      	result.sourceMap.sources.forEach((source, i) => {
+      		result.sourceMap.sources[i] = `../../${source.replace(/(.*(?=src\/scss))/g, '')}`;
+      	});
         const cssSourceMapFilePath = `${directories.dist.css}/${cssSourceMapFilename}`;
         await fs.writeFile(`${cssSourceMapFilePath}`, JSON.stringify(result.sourceMap), err => {
           if (err) {

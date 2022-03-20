@@ -4,7 +4,7 @@
  * This file configures Static Kit's different build tasks.
  * 
  * To customize various Static Kit options, please edit the
- * configuration file at .static, which is located in the same
+ * configuration file at .staticrc, which is located in the same
  * directory as this file.
  **/
 
@@ -24,7 +24,7 @@ const sass = require('sass');
 // Import our per-project configurations
 let config;
 try {
-  const data = fs.readFileSync("./.static");
+  const data = fs.readFileSync("../.staticrc");
   config = JSON.parse(data);
 } catch(err) {}
 

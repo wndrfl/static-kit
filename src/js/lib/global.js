@@ -6,7 +6,7 @@
  * NOTE: Please do not include any page-specific logic here.
  **/
 
-import Logger from "../lib/Logger";
+import Logger from "../lib/logger";
 
 export default function () {
   const NAME = 'Global';

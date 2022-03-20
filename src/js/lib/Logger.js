@@ -42,4 +42,5 @@ class Logger {
 		Logger.info(`${this.NAME} > init`);
 	}
 }
+
 export default Logger;

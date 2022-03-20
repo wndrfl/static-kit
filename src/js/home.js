@@ -5,8 +5,8 @@
  * this specific functionality.
  **/
 
-import Global from './lib/Global';
-import Logger from './lib/Logger';
+import Global from './lib/global';
+import Logger from './lib/logger';
 
 // Vars
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒

@@ -15,6 +15,7 @@ const fs = require("fs");
 const imageminJpegtran = require("imagemin-jpegtran");
 const imageminPngquant = require("imagemin-pngquant");
 const sass = require('sass');
+const explore = require('source-map-explorer').default;
 
 
 /*****************************************
@@ -26,37 +27,41 @@ let config;
 try {
   const data = fs.readFileSync("../.staticrc");
   config = JSON.parse(data);
-} catch(err) {}
+} catch (err) { }
 
 // A dictionary of various directories
 const directories = {
-  dist : {
-    css : 'dist/css',
-    images : 'dist/images',
-    js : 'dist/js',
+  dist: {
+    css: 'dist/css',
+    images: 'dist/images',
+    js: 'dist/js',
   },
-  src : {
-    images : 'src/images',
-    js : 'src/js',
-    scss : 'src/scss'
-  }
+  src: {
+    images: 'src/images',
+    js: 'src/js',
+    scss: 'src/scss'
+  },
+  analysis: 'analysis'
 };
 
 // Allow for overwrites
-if(config && config.paths) {
-  if(config.paths.dist) {
-    for(var i in config.paths.dist) {
-      if(directories.dist[i]) {
+if (config && config.paths) {
+  if (config.paths.dist) {
+    for (var i in config.paths.dist) {
+      if (directories.dist[i]) {
         directories.dist[i] = config.paths.dist[i];
       }
     }
   }
-  if(config.paths.src) {
-    for(var i in config.paths.src) {
-      if(directories.src[i]) {
+  if (config.paths.src) {
+    for (var i in config.paths.src) {
+      if (directories.src[i]) {
         directories.src[i] = config.paths.src[i];
       }
     }
+  }
+  if (config.paths.analysis) {
+    directories.analysis = config.paths.analysis;
   }
 }
 
@@ -78,12 +83,12 @@ const getScssBuildFiles = async () => {
 // Build all Javascript fiels
 const buildJs = async (file) => {
 
-  if(file) {
+  if (file) {
     console.log(`Building ${file}`);
-  }else{
+  } else {
     console.log(`Building Javascript: ${directories.src.js}`);
   }
-  
+
   try {
 
     const timerStart = Date.now();
@@ -115,9 +120,9 @@ const buildJs = async (file) => {
 // Build all SCSS files
 const buildScss = async (file) => {
 
-  if(file) {
+  if (file) {
     console.log(`Building ${file}`);
-  }else{
+  } else {
     console.log(`Building SCSS: ${directories.src.scss}`);
   }
 
@@ -129,7 +134,7 @@ const buildScss = async (file) => {
     const files = file ? [file] : await getScssBuildFiles();
 
     // Build code
-    for(var i in files) {
+    for (var i in files) {
       const file = files[i];
       const result = await sass.compileAsync(file, {
         loadPaths: ["node_modules"],
@@ -153,12 +158,12 @@ const buildScss = async (file) => {
         }
       });
 
-      if(result.sourceMap) {
-      	const searchStr = `src/scss/`;
-      	const re = new RegExp(`/(.*(?=${directories.src.scss}))/g`,"g");
-      	result.sourceMap.sources.forEach((source, i) => {
-      		result.sourceMap.sources[i] = `../../${source.replace(/(.*(?=src\/scss))/g, '')}`;
-      	});
+      if (result.sourceMap) {
+        const searchStr = `src/scss/`;
+        const re = new RegExp(`/(.*(?=${directories.src.scss}))/g`, "g");
+        result.sourceMap.sources.forEach((source, i) => {
+          result.sourceMap.sources[i] = `../../${source.replace(/(.*(?=src\/scss))/g, '')}`;
+        });
         const cssSourceMapFilePath = `${directories.dist.css}/${cssSourceMapFilename}`;
         await fs.writeFile(`${cssSourceMapFilePath}`, JSON.stringify(result.sourceMap), err => {
           if (err) {
@@ -204,10 +209,60 @@ const optimizeImages = async () => {
   return true;
 }
 
+const analyzeJs = async () => {
+  console.log("Analyzing JS files...");
+
+  try {
+    const res = await explore(`${directories.dist.js}/*.js`, {
+      output: {
+        format: "html",
+        filename: `${directories.analysis}/js.analysis.html`
+      }
+    })
+
+    if (res.bundles) {
+      res.bundles.forEach(bundle => {
+        console.log(`Analyzed ${bundle.bundleName}`);
+      })
+    }
+  } catch (err) {
+    if (err.bundles.length === 0) {
+      console.log("No JS bundles found");
+    } else {
+      console.log(err);
+    }
+  }
+}
+
+const analyzeCss = async () => {
+  console.log("Analyzing CSS files...");
+
+  try {
+    const res = await explore(`${directories.dist.css}/*.css`, {
+      output: {
+        format: "html",
+        filename: `${directories.analysis}/css.analysis.html`
+      }
+    })
+
+    if (res.bundles) {
+      res.bundles.forEach(bundle => {
+        console.log(`Analyzed ${bundle.bundleName}`);
+      })
+    }
+  } catch (err) {
+    if (err.bundles.length === 0) {
+      console.log("No CSS bundles found");
+    } else {
+      console.log(err);
+    }
+  }
+}
+
 const run = async () => {
+  await optimizeImages();
   await buildScss();
   await buildJs();
-  await optimizeImages();
   return true;
 };
 
@@ -215,12 +270,12 @@ const run = async () => {
 run().then(async () => {
 
   // Watch files?
-  if(process.argv.includes("--watch")) {
+  if (process.argv.includes("--watch")) {
 
     console.log("Watching files...");
 
     // Listen for Image changes
-    chokidar.watch([`${directories.src.images}/*.{jpg,png}`]).on("change", (path, stats) => { 
+    chokidar.watch([`${directories.src.images}/*.{jpg,png}`]).on("change", (path, stats) => {
       if (stats) console.log(`Image ${path} changed size to ${stats.size}`);
       optimizeImages();
     });
@@ -228,7 +283,7 @@ run().then(async () => {
     // Listen for JS changes
     chokidar.watch([`${directories.src.js}/**/*.js`]).on("change", async (path, stats) => {
       const files = await getJsBuildFiles();
-      if(files.includes(path)) {
+      if (files.includes(path)) {
         buildJs(path);
       } else {
         buildJs();
@@ -238,13 +293,15 @@ run().then(async () => {
     // Listen for SCSS changes
     chokidar.watch([`${directories.src.scss}/**/*.scss`]).on("change", async (path, stats) => {
       const files = await getScssBuildFiles();
-      if(files.includes(path)) {
+      if (files.includes(path)) {
         buildScss(path);
       } else {
         buildScss();
       }
     });
-
   }
 
+  if (process.argv.includes("--analyze")) {
+    analyzeJs().then(() => analyzeCss());
+  }
 });

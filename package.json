@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "node statickit",
-    "dev": "node statickit --watch"
+    "dev": "node statickit --watch",
+    "analyze": "node statickit --analyze"
   },
   "devDependencies": {
     "bootstrap": "^5.1.3",
@@ -20,7 +21,8 @@
     "imagemin": "^8.0.1",
     "imagemin-jpegtran": "^7.0.0",
     "imagemin-pngquant": "^9.0.2",
-    "sass": "^1.49.9"
+    "sass": "^1.49.9",
+    "source-map-explorer": "^2.5.2"
   },
   "author": "",
   "license": "ISC"

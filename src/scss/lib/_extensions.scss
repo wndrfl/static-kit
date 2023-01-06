@@ -1,73 +1,762 @@
-%h1 {
-	font-size:40px;
-	line-height:48px;
+%col-12 {
+	@include col-12;
+}
 
-	@include breakpoint(tablet-screen) {
-		font-size:44px;
-		line-height:56px;
+%col-11 {
+	@include col-11;
+}
+
+%col-10 {
+	@include col-10;
+}
+
+%col-9 {
+	@include col-9;
+}
+
+%col-8 {
+	@include col-8;
+}
+
+%col-7 {
+	@include col-7;
+}
+
+%col-6 {
+	@include col-6;
+}
+
+%col-5 {
+	@include col-5;
+}
+
+%col-4 {
+	@include col-4;
+}
+
+%col-3 {
+	@include col-3;
+}
+
+%col-2 {
+	@include col-2;
+}
+
+%col-1 {
+	@include col-1;
+}
+
+
+%col-m-12 {
+	@include mobile-only {
+		@include col-12;
 	}
 }
 
-%h2 {
-	font-size:36px;
-	line-height:44px;
-
-	@include breakpoint(tablet-screen) {
-		font-size:40px;
-		line-height:52px;
+%col-m-11 {
+	@include mobile-only {
+		@include col-11;
 	}
 }
 
-%h3 {
-	font-size:32px;
-	line-height:40px;
-
-	@include breakpoint(tablet-screen) {
-		font-size:36px;
-		line-height:48px;
+%col-m-10 {
+	@include mobile-only {
+		@include col-10;
 	}
 }
 
-%h4 {
-	font-size:28px;
-	line-height:36px;
-
-	@include breakpoint(tablet-screen) {
-		font-size:32px;
-		line-height:44px;
+%col-m-9 {
+	@include mobile-only {
+		@include col-9;
 	}
 }
 
-%h5 {
-	font-size:24px;
-	line-height:32px;
-
-	@include breakpoint(tablet-screen) {
-		font-size:28px;
-		line-height:40px;
+%col-m-8 {
+	@include mobile-only {
+		@include col-8;
 	}
 }
 
-%h6 {
-	font-size:20px;
-	line-height:28px;
-
-	@include breakpoint(tablet-screen) {
-		font-size:24px;
-		line-height:36px;
+%col-m-7 {
+	@include mobile-only {
+		@include col-7;
 	}
 }
+
+%col-m-6 {
+	@include mobile-only {
+		@include col-6;
+	}
+}
+
+%col-m-5 {
+	@include mobile-only {
+		@include col-5;
+	}
+}
+
+%col-m-4 {
+	@include mobile-only {
+		@include col-4;
+	}
+}
+
+%col-m-3 {
+	@include mobile-only {
+		@include col-3;
+	}
+}
+
+%col-m-2 {
+	@include mobile-only {
+		@include col-2;
+	}
+}
+
+%col-m-1 {
+	@include mobile-only {
+		@include col-1;
+	}
+}
+
+
+%col-t-12 {
+	@include tablet {
+		@include col-12;
+	}
+}
+
+%col-t-11 {
+	@include tablet {
+		@include col-11;
+	}
+}
+
+%col-t-10 {
+	@include tablet {
+		@include col-10;
+	}
+}
+
+%col-t-9 {
+	@include tablet {
+		@include col-9;
+	}
+}
+
+%col-t-8 {
+	@include tablet {
+		@include col-8;
+	}
+}
+
+%col-t-7 {
+	@include tablet {
+		@include col-7;
+	}
+}
+
+%col-t-6 {
+	@include tablet {
+		@include col-6;
+	}
+}
+
+%col-t-5 {
+	@include tablet {
+		@include col-5;
+	}
+}
+
+%col-t-4 {
+	@include tablet {
+		@include col-4;
+	}
+}
+
+%col-t-3 {
+	@include tablet {
+		@include col-3;
+	}
+}
+
+%col-t-2 {
+	@include tablet {
+		@include col-2;
+	}
+}
+
+%col-t-1 {
+	@include tablet {
+		@include col-1;
+	}
+}
+
+
+%col-d-12 {
+	@include desktop {
+		@include col-12;
+	}
+}
+
+%col-d-11 {
+	@include desktop {
+		@include col-11;
+	}
+}
+
+%col-d-10 {
+	@include desktop {
+		@include col-10;
+	}
+}
+
+%col-d-9 {
+	@include desktop {
+		@include col-9;
+	}
+}
+
+%col-d-8 {
+	@include desktop {
+		@include col-8;
+	}
+}
+
+%col-d-7 {
+	@include desktop {
+		@include col-7;
+	}
+}
+
+%col-d-6 {
+	@include desktop {
+		@include col-6;
+	}
+}
+
+%col-d-5 {
+	@include desktop {
+		@include col-5;
+	}
+}
+
+%col-d-4 {
+	@include desktop {
+		@include col-4;
+	}
+}
+
+%col-d-3 {
+	@include desktop {
+		@include col-3;
+	}
+}
+
+%col-d-2 {
+	@include desktop {
+		@include col-2;
+	}
+}
+
+%col-d-1 {
+	@include desktop {
+		@include col-1;
+	}
+}
+
+
+%col-offset-1 {
+	@include col-offset-1;
+}
+
+%col-offset-2 {
+	@include col-offset-2;
+}
+
+%col-offset-3 {
+	@include col-offset-3;
+}
+
+%col-offset-4 {
+	@include col-offset-4;
+}
+
+%col-offset-5 {
+	@include col-offset-5;
+}
+
+%col-offset-6 {
+	@include col-offset-6;
+}
+
+%col-offset-7 {
+	@include col-offset-7;
+}
+
+%col-offset-8 {
+	@include col-offset-8;
+}
+
+%col-offset-9 {
+	@include col-offset-9;
+}
+
+%col-offset-10 {
+	@include col-offset-10;
+}
+
+%col-offset-11 {
+	@include col-offset-11;
+}
+
+
+%col-t-offset-1 {
+	@include tablet {
+		@include col-offset-1;
+	}
+}
+
+%col-t-offset-2 {
+	@include tablet {
+		@include col-offset-2 ;
+	}
+}
+
+%col-t-offset-3 {
+	@include tablet {
+		@include col-offset-3;
+	}
+}
+
+%col-t-offset-4 {
+	@include tablet {
+		@include col-offset-4;
+	}
+}
+
+%col-t-offset-5 {
+	@include tablet {
+		@include col-offset-5;
+	}
+}
+
+%col-t-offset-6 {
+	@include tablet {
+		@include col-offset-6;
+	}
+}
+
+%col-t-offset-7 {
+	@include tablet {
+		@include col-offset-7;
+	}
+}
+
+%col-t-offset-8 {
+	@include tablet {
+		@include col-offset-8;
+	}
+}
+
+%col-t-offset-9 {
+	@include tablet {
+		@include col-offset-9;
+	}
+}
+
+%col-t-offset-10 {
+	@include tablet {
+		@include col-offset-10;
+	}
+}
+
+%col-t-offset-11 {
+	@include tablet {
+		@include col-offset-11;
+	}
+}
+
+
+%col-d-offset-1 {
+	@include desktop {
+		@include col-offset-1;
+	}
+}
+
+%col-d-offset-2 {
+	@include desktop {
+		@include col-offset-2;
+	}
+}
+
+%col-d-offset-3 {
+	@include desktop {
+		@include col-offset-3;
+	}
+}
+
+%col-d-offset-4 {
+	@include desktop {
+		@include col-offset-4;
+	}
+}
+
+%col-d-offset-5 {
+	@include desktop {
+		@include col-offset-5;
+	}
+}
+
+%col-d-offset-6 {
+	@include desktop {
+		@include col-offset-6;
+	}
+}
+
+%col-d-offset-7 {
+	@include desktop {
+		@include col-offset-7;
+	}
+}
+
+%col-d-offset-8 {
+	@include desktop {
+		@include col-offset-8;
+	}
+}
+
+%col-d-offset-9 {
+	@include desktop {
+		@include col-offset-9;
+	}
+}
+
+%col-d-offset-10 {
+	@include desktop {
+		@include col-offset-10;
+	}
+}
+
+%col-d-offset-11 {
+	@include desktop {
+		@include col-offset-11;
+	}
+}
+
+
+%col-start-1 {
+	@include col-start-1;
+}
+
+%col-start-2 {
+	@include col-start-2;
+}
+
+%col-start-3 {
+	@include col-start-3;
+}
+
+%col-start-4 {
+	@include col-start-4;
+}
+
+%col-start-5 {
+	@include col-start-5;
+}
+
+%col-start-6 {
+	@include col-start-6;
+}
+
+%col-start-7 {
+	@include col-start-7;
+}
+
+%col-start-8 {
+	@include col-start-8;
+}
+
+%col-start-9 {
+	@include col-start-9;
+}
+
+%col-start-10 {
+	@include col-start-10;
+}
+
+%col-start-11 {
+	@include col-start-11;
+}
+
+%col-start-12 {
+	@include col-start-12;
+}
+
+
+%col-t-start-1 {
+	@include tablet {
+		@include col-start-1;
+	}
+}
+
+%col-t-start-2 {
+	@include tablet {
+		@include col-start-2;
+	}
+}
+
+%col-t-start-3 {
+	@include tablet {
+		@include col-start-3;
+	}
+}
+
+%col-t-start-4 {
+	@include tablet {
+		@include col-start-4;
+	}
+}
+
+%col-t-start-5 {
+	@include tablet {
+		@include col-start-5;
+	}
+}
+
+%col-t-start-6 {
+	@include tablet {
+		@include col-start-6;
+	}
+}
+
+%col-t-start-7 {
+	@include tablet {
+		@include col-start-7;
+	}
+}
+
+%col-t-start-8 {
+	@include tablet {
+		@include col-start-8;
+	}
+}
+
+%col-t-start-9 {
+	@include tablet {
+		@include col-start-9;
+	}
+}
+
+%col-t-start-10 {
+	@include tablet {
+		@include col-start-10;
+	}
+}
+
+%col-t-start-11 {
+	@include tablet {
+		@include col-start-11;
+	}
+}
+
+
+%col-d-start-1 {
+	@include desktop {
+		@include col-start-1;
+	}
+}
+
+%col-d-start-2 {
+	@include desktop {
+		@include col-start-2;
+	}
+}
+
+%col-d-start-3 {
+	@include desktop {
+		@include col-start-3;
+	}
+}
+
+%col-d-start-4 {
+	@include desktop {
+		@include col-start-4;
+	}
+}
+
+%col-d-start-5 {
+	@include desktop {
+		@include col-start-5;
+	}
+}
+
+%col-d-start-6 {
+	@include desktop {
+		@include col-start-6;
+	}
+}
+
+%col-d-start-7 {
+	@include desktop {
+		@include col-start-7;
+	}
+}
+
+%col-d-start-8 {
+	@include desktop {
+		@include col-start-8;
+	}
+}
+
+%col-d-start-9 {
+	@include desktop {
+		@include col-start-9;
+	}
+}
+
+%col-d-start-10 {
+	@include desktop {
+		@include col-start-10;
+	}
+}
+
+%col-d-start-11 {
+	@include desktop {
+		@include col-start-11;
+	}
+}
+
 
 %headline {
 	color:$color-black;
 	font-family:$font-sans-serif;
-	font-weight:700;
+	font-weight:600;
 	margin:0;
 }
 
+%headline-bold{
+	@extend %headline;
+	font-weight:700;
+}
+
+%h1 {
+	@extend %headline;
+	font-weight: 700;
+	font-size: 32px;
+	line-height: 38px;
+	letter-spacing: -0.015em;
+
+	@include tablet {
+		font-size: 48px;
+		line-height: 48px;
+	}
+}
+
+%h2 {
+	@extend %headline;
+	font-size:24px;
+	line-height:30px;
+	font-weight: 600;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+
+	@include tablet {
+		font-size: 28px;
+		line-height: 32px;
+	}
+}
+
+%h3 {
+	@extend %headline;
+	font-size: 18px;
+	line-height: 24px;
+
+	@include tablet {
+		font-size: 20px;
+		line-height: 24px;
+	}
+}
+
+%h4 {
+	@extend %headline;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 24px;
+	letter-spacing: -0.01em;
+
+	@include tablet {
+		font-size: 20px;
+		line-height: 24px;
+	}
+}
+
+%h5 {
+	@extend %headline;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 22px;
+	letter-spacing: -0.01em;
+
+	@include tablet {
+		font-size: 18px;
+		line-height: 22px;
+	}
+}
+
+%h6 {
+	@extend %headline;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: -0.01em;
+
+	@include tablet {
+		font-size: 16px;
+		line-height: 20px;
+	}
+}
+
+%grid-12 {
+	position: relative;
+	display: grid;
+	display: -ms-grid;
+	max-width: #{ map_get($media-rules, desktop-width-max)};
+	margin: 0 auto;
+	padding: 0 20px;
+	align-items: flex-start;
+	// grid-gap: 32px;
+	grid-column-gap: 20px;
+	grid-template-columns: repeat(12, [col-start] minmax(0, #{ map_get($media-rules, desktop-width-max)}));
+	-ms-grid-columns: repeat(12, [col-start] minmax(0, #{ map_get($media-rules, desktop-width-max)}));
+
+	@include tablet-only {
+		//padding: 0 24px;
+		// grid-gap: 24px;
+		grid-template-columns: repeat(12, [col-start] minmax(0, #{ map_get($media-rules, desktop-width-max)}));
+	}
+
+	@include mobile-only {
+		//padding: 0 16px;
+		// grid-gap: 16px;
+		grid-template-columns: repeat(12, [col-start] minmax(0, #{ map_get($media-rules, desktop-width-max)}));
+	}
+
+	& > * {
+		word-wrap: break-word;
+	}
+
+	&--full-width {
+		padding: 0;
+	}
+}
+
 %paragraph {
-	color:$color-black;
-	font-size:16px;
-	font-weight:400;
-	line-height:24px;
+	color: $color-black;
+	font-family: $font-sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 26px;
+	letter-spacing: 0.005em;
 }

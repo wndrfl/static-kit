@@ -7,13 +7,16 @@
 }
 
 @mixin clearfix {
-	zoom:1;
-	&:before, &:after {
+	zoom: 1;
+
+	&:before,
+	&:after {
 		content: "\0020";
 		display: block;
 		height: 0;
 		overflow: hidden;
 	}
+
 	&:after {
 		clear: both;
 	}
@@ -24,26 +27,40 @@
 }
 
 @mixin box-shadow($params) {
-	-webkit-box-shadow:$params;
-	-moz-box-shadow:$params;
-	box-shadow:$params;
+	-webkit-box-shadow: $params;
+	-moz-box-shadow: $params;
+	box-shadow: $params;
 }
 
 @mixin breakpoint($point) {
-	@if $point == large-desktop-screen {
-		@media (min-width: 1200px) { @content; }
+	@if $point ==large-desktop-screen {
+		@media (min-width: 1200px) {
+			@content;
+		}
 	}
-	@else if $point == desktop-screen {
-		@media (min-width: 992px)  { @content; }
+
+	@else if $point ==desktop-screen {
+		@media (min-width: 992px) {
+			@content;
+		}
 	}
-	@else if $point == tablet-screen {
-		@media (min-width: 768px)  { @content; }
+
+	@else if $point ==tablet-screen {
+		@media (min-width: 768px) {
+			@content;
+		}
 	}
-	@else if $point == large-phone-screen {
-		@media (min-width: 576px)  { @content; }
+
+	@else if $point ==large-phone-screen {
+		@media (min-width: 576px) {
+			@content;
+		}
 	}
-	@else if $point == only-phone-screen {
-		@media (max-width: 767px)  { @content; }
+
+	@else if $point ==only-phone-screen {
+		@media (max-width: 767px) {
+			@content;
+		}
 	}
 }
 
@@ -193,14 +210,16 @@
 // Media queries
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 $media-rules: (
-		tablet-width-min: 720px,
-		desktop-width-min: 960px,
-		desktop-width-max: 1120px,
-		sm-container-max: 540px,
-		md-container-max: 720px,
-		lg-container-max: 960px,
-		xl-container-max: 1140px,
-		xxl-container-max: 1320px
+	tablet-width-min: 720px,
+	laptop-width-min: 1024px,
+	desktop-width-min: 1440px,
+	desktop-width-max: 1600px,
+	large-desktop-width-min: 1441px,
+	sm-container-max: 540px,
+	md-container-max: 720px,
+	lg-container-max: 960px,
+	xl-container-max: 1140px,
+	xxl-container-max: 1320px
 );
 
 @mixin mobile-only {
@@ -216,13 +235,49 @@ $media-rules: (
 }
 
 @mixin tablet-only {
-	@media (min-width: #{ map_get($media-rules, tablet-width-min)}) and (max-width: #{ map_get($media-rules, desktop-width-min) - 1px}) {
+	@media (min-width: #{ map_get($media-rules, tablet-width-min)}) and (max-width: #{ map_get($media-rules, laptop-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin mobile-thru-tablet {
+	@media (max-width: #{ map_get($media-rules, laptop-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin mobile-thru-laptop {
+	@media (max-width: #{ map_get($media-rules, desktop-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin laptop {
+	@media (min-width: #{ map_get($media-rules, laptop-width-min)}) {
+		@content;
+	}
+}
+
+@mixin laptop-only {
+	@media (min-width: #{ map_get($media-rules, laptop-width-min)}) and (max-width: #{ map_get($media-rules, desktop-width-min) - 1px}) {
 		@content;
 	}
 }
 
 @mixin desktop {
 	@media (min-width: #{ map_get($media-rules, desktop-width-min)}) {
+		@content;
+	}
+}
+
+@mixin large-desktop {
+	@media (min-width: #{ map_get($media-rules, large-desktop-width-min)}) {
+		@content;
+	}
+}
+
+@mixin hover-check {
+	@media(hover: hover) and (pointer: fine) {
 		@content;
 	}
 }
@@ -241,4 +296,15 @@ $media-rules: (
 	-ms-transition: $transition-property $transition-time $method;
 	-o-transition: $transition-property $transition-time $method;
 	transition: $transition-property $transition-time $method;
+}
+
+@mixin flex-gap-width($columns, $gap) {
+	width: calc((100% / $columns) - $gap + ($gap / $columns));
+}
+
+@mixin line-clamp($lines) {
+	display: -webkit-box;
+	-webkit-line-clamp: $lines;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }

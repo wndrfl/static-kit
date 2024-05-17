@@ -8,12 +8,6 @@
 @import './normalize';
 @import './pallette';
 
-// CSS used by the WordPress WYSIWYG (https://codex.wordpress.org/CSS)
-// If this is a WordPress Project, you should
-// uncomment the below @import
-// @import './wordpress';
-
-
 
 /////////////////////////////
 // Fonts
@@ -39,28 +33,27 @@
 /////////////////////////////
 
 @import '../partials/theme-button';
+@import '../partials/theme-footer';
 @import '../partials/theme-header';
-@import '../partials/theme-headline';
-@import '../partials/theme-rte';
 
 *,
 a,
 a:hover {
-	color:$color-black;
-	font-family:$font-sans-serif;
+	color: $color-black;
+	font-family: $font-sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 
 a {
-	text-decoration:underline;
+	text-decoration: underline;
 
 	&.no-underline {
-		text-decoration:none;
+		text-decoration: none;
 	}
 }
 
 body {
-	background-color:$color-white;
+	background-color: $color-white;
 
 	&.no-scroll {
 		overflow: hidden;

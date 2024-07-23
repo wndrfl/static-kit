@@ -1,0 +1,63 @@
+// Media queries
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+$media-rules: (
+	tablet-width-min: 720px,
+	laptop-width-min: 1024px,
+	desktop-width-min: 1440px,
+	desktop-width-max: 1600px,
+	large-desktop-width-min: 1441px
+);
+
+@mixin mobile-only {
+	@media (max-width: #{ map_get($media-rules, tablet-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: #{ map_get($media-rules, tablet-width-min)}) {
+		@content;
+	}
+}
+
+@mixin tablet-only {
+	@media (min-width: #{ map_get($media-rules, tablet-width-min)}) and (max-width: #{ map_get($media-rules, laptop-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin mobile-thru-tablet {
+	@media (max-width: #{ map_get($media-rules, laptop-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin mobile-thru-laptop {
+	@media (max-width: #{ map_get($media-rules, desktop-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin laptop {
+	@media (min-width: #{ map_get($media-rules, laptop-width-min)}) {
+		@content;
+	}
+}
+
+@mixin laptop-only {
+	@media (min-width: #{ map_get($media-rules, laptop-width-min)}) and (max-width: #{ map_get($media-rules, desktop-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: #{ map_get($media-rules, desktop-width-min)}) {
+		@content;
+	}
+}
+
+@mixin large-desktop {
+	@media (min-width: #{ map_get($media-rules, large-desktop-width-min)}) {
+		@content;
+	}
+}

@@ -26,7 +26,7 @@
 @import './mixins';
 @import './media-queries';
 @import './grid';
-@import './extensions';
+@import './typography';
 
 
 
@@ -48,10 +48,6 @@ a:hover {
 
 a {
 	text-decoration: underline;
-
-	&.no-underline {
-		text-decoration: none;
-	}
 }
 
 body {

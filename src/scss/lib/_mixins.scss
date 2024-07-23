@@ -12,3 +12,8 @@
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 }
+
+@mixin no-spacing {
+	margin: 0;
+	padding: 0;
+}

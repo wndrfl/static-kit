@@ -32,3 +32,7 @@ To begin development, simply run `npm run dev` from your Static Kit directory. T
 To only complile, run `npm run build`.
 
 Static Kit is preconfigured to watch your files and compile any static assets to the directories that are set in your `.static` file.
+
+## License
+
+MIT © Wonderful — see [LICENSE](../LICENSE).

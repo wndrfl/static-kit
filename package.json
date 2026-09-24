@@ -11,5 +11,5 @@
     "dev": "node statickit --watch"
   },
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }

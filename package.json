@@ -1,15 +1,11 @@
 {
   "name": "static-kit",
-  "version": "3.2.6",
-  "description": "",
-  "main": "index.js",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Deprecated downloadable tree. Install @wndrfl/static-kit-cli instead.",
   "engines": {
-    "node": ">=12.10.0"
+    "node": ">=20.0.0"
   },
-  "scripts": {
-    "build": "node statickit",
-    "dev": "node statickit --watch"
-  },
-  "author": "",
+  "author": "Wonderful",
   "license": "MIT"
 }
